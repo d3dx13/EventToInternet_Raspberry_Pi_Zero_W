@@ -5,7 +5,7 @@ while [[ 1 ]]
     update=False
 
     echo "ping https://github.com"
-    case "$(curl -s --max-time 2 -I https://github.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
+    case "$(curl -s --max-time 10 -I https://github.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
       [23]) echo "HTTP connectivity is up"; update=True;;
       5) echo "The web proxy won't let us through";;
       *) echo "The network is down or very slow";;
