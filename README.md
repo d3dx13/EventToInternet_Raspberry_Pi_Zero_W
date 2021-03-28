@@ -3,6 +3,10 @@
 
 
 
+Время полной загрузки raspberry pi zero w вместе с этим фреймворком составляет 45.608 секунд.
+
+
+
 ```bash
 sudo apt update -y
 sudo apt upgrade -y
