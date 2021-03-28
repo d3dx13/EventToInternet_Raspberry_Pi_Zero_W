@@ -26,3 +26,7 @@ numpad_symbols_codes = {
 }
 
 split_keys = {"KEY_ENTER", "KEY_KPENTER"}
+
+capitalize_all_keys = {"KEY_LEFTSHIFT", "KEY_RIGHTSHIFT"}
+
+capitalize_symbols_turn_keys = {"KEY_CAPSLOCK", }

