@@ -41,7 +41,8 @@ then
     git clean -fd
     git pull --force
     cp -f /etc/systemd/system/EventToInternet/EventToInternet.service /etc/systemd/system/EventToInternet.service
-    sudo systemctl restart EventToInternet.service
+    systemctl daemon-reload
+    systemctl restart EventToInternet.service
 fi
 
 
