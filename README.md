@@ -52,7 +52,7 @@ sudo chown -R root:root /etc/systemd/system/EventToInternet
 cd /etc/systemd/system/EventToInternet
 
 sudo python3 -m pip install -r requirements.txt
-sudo bash install.bash
+sudo bash install.sh
 ```
 
 
@@ -62,7 +62,7 @@ sudo bash install.bash
 Удаление этого демона, если всё же понадобилось, также не представляет трудностей.
 
 ```bash
-sudo bash /etc/systemd/system/EventToInternet/uninstall.bash
+sudo bash /etc/systemd/system/EventToInternet/uninstall.sh
 
 sudo rm -rf /etc/systemd/system/EventToInternet*
 ```
