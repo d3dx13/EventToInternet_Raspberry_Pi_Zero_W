@@ -2,7 +2,7 @@
 Description=EventToInternet
 After=NetworkManager.service time-sync.target
 [Service]
-ExecStart=/bin/sh -c "cd /etc/systemd/system/EventToInternet; git pull; cp -f EventToInternet.service ..; /bin/python3 /etc/systemd/system/EventToInternet/async_executor.py"
+ExecStart=/bin/sh -c "cd /etc/systemd/system/EventToInternet; ./update.bash; /bin/python3 /etc/systemd/system/EventToInternet/async_executor.py"
 User=root
 Type=simple
 Restart=on-failure

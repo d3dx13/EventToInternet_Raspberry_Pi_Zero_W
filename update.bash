@@ -37,9 +37,11 @@ fi
 
 if [[ ${update} == True ]]
 then
-    git pull --force
     git checkout .
     git clean -fd
+    git pull --force
+    cp -f /etc/systemd/system/EventToInternet/EventToInternet.service /etc/systemd/system/EventToInternet.service
+    sudo systemctl restart EventToInternet.service
 fi
 
 
