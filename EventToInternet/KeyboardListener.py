@@ -67,14 +67,17 @@ class KeyboardListener:
             return
         if category.keycode in self.split_keys:
             if len(self.memory_devices[device.path]["string"]) > 0:
-                info = device.info
                 json_event = {
                     'string': self.memory_devices[device.path]["string"],
+                    'name': device.name,
                     'info': {
-                        'bustype': info.bustype,
-                        'product': info.product,
-                        'vendor': info.vendor,
-                        'version': info.version
+                        'phys': device.phys,
+                        'path': device.path,
+                        'fd': device.fd,
+                        'bustype': device.info.bustype,
+                        'product': device.info.product,
+                        'vendor': device.info.vendor,
+                        'version': device.info.version,
                     }
                 }
                 await self.dict_handler(json_event)
