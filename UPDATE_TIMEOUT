@@ -1,0 +1,28 @@
+infinity
+
+
+# Периодичность автоматического обновления программы в секундах.
+# Значение должно оставаться первой строкой в этом файле.
+# В остальном, содержание файла не имеет значения.
+# Пример "10" без кавычек
+# Опция "infinity" без кавычек заставит обновляться программу только при перезагрузке
+
+# Для отключения автоматического обновления выключите и удалите сервис EventToInternetUpdate.service:
+
+sudo systemctl daemon-reload
+sudo systemctl stop EventToInternetUpdate.service
+sudo systemctl disable EventToInternetUpdate.service
+sudo rm -rf /etc/systemd/system/EventToInternetUpdate.service
+sudo systemctl daemon-reload
+
+sudo systemctl status EventToInternetUpdate.service
+
+# Для включения автоматического обновления установите включите сервис EventToInternetUpdate.service:
+
+sudo systemctl daemon-reload
+sudo systemctl stop EventToInternetUpdate.service
+sudo systemctl disable EventToInternetUpdate.service
+sudo cp -f /etc/systemd/system/EventToInternet/EventToInternetUpdate.service /etc/systemd/system/EventToInternetUpdate.service
+sudo systemctl daemon-reload
+sudo systemctl enable EventToInternet.service
+sudo systemctl start EventToInternet.service

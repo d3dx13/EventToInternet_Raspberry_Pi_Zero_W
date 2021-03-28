@@ -49,6 +49,6 @@ while [[ 1 ]]
         systemctl restart EventToInternetUpdate.service
     fi
 
-    sleep 10
+    sleep $(head -n 1 UPDATE_TIMEOUT)
 done
 
