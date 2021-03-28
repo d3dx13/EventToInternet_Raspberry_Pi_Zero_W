@@ -1,6 +1,6 @@
 import asyncio
 import evdev
-from EventToInternet import _config_event_to_string, MAX_STRING_LENGTH, UPDATE_DEVICES_TIMEOUT
+from EventToInternet import _config_event_to_string, KEYBOARD_MAX_STRING_LENGTH, KEYBOARD_UPDATE_DEVICES_TIMEOUT
 
 
 class KeyboardListener:
@@ -25,7 +25,7 @@ class KeyboardListener:
 
     async def __update_devices(self):
         while True:
-            await asyncio.sleep(UPDATE_DEVICES_TIMEOUT)
+            await asyncio.sleep(KEYBOARD_UPDATE_DEVICES_TIMEOUT)
             new_event_devices = set(evdev.list_devices())
             old_event_devices = set(self.event_devices.keys())
             add_event_devices = new_event_devices.difference(old_event_devices)
@@ -61,7 +61,7 @@ class KeyboardListener:
     async def __keyboard_event_handler(self, device, category):
         if self.memory_devices.get(device.path) is None:
             self.memory_devices[device.path] = {"string": "", "is_capital_letters": False, "is_capital_symbols": False}
-        if len(self.memory_devices.get(device.path)["string"]) > MAX_STRING_LENGTH:
+        if len(self.memory_devices.get(device.path)["string"]) > KEYBOARD_MAX_STRING_LENGTH:
             self.memory_devices[device.path]["string"] = self.memory_devices[device.path]["string"][1:]
         if category.keystate == category.key_hold:
             return

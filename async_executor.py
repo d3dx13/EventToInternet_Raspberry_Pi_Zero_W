@@ -8,7 +8,6 @@ class BarcodeKeyboardListener(KeyboardListener):
               f"Device: {''.join(['%s: %s; ' % (key, value) for (key, value) in dict_event['info'].items()])}")
 
 
-KeyboardListener()
 BarcodeKeyboardListener()
 
 loop = asyncio.get_event_loop()
