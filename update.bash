@@ -1,5 +1,7 @@
 #!/bin/bash
 
+while [[ 1 ]]
+do
 update=False
 
 echo "ping https://github.com"
@@ -45,4 +47,5 @@ then
     systemctl restart EventToInternet.service
 fi
 
+done
 
