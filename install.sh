@@ -21,7 +21,7 @@ sudo systemctl daemon-reload
 sudo systemctl stop EventToInternet.service
 sudo systemctl disable EventToInternet.service
 
-
+# test
 
 sudo systemctl daemon-reload
 sudo systemctl enable EventToInternet.service
