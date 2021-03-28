@@ -1,6 +1,7 @@
 [Unit]
 Description=EventToInternet
-After=NetworkManager.service time-sync.target
+Wants=network-online.target
+After=NetworkManager.service time-sync.target network.target network-online.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
 ExecStart=/bin/sh -c "/bin/python3 async_executor.py"
