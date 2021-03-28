@@ -15,7 +15,7 @@ sudo chown -R root:root /etc/systemd/system/EventToInternet
 cd /etc/systemd/system/EventToInternet
 
 sudo git pull
-sudo cp -f EventToInternet.service /etc/systemd/system/EventToInternet.service
+sudo cp -f /etc/systemd/system/EventToInternet/EventToInternet.service /etc/systemd/system/EventToInternet.service
 
 sudo systemctl daemon-reload
 sudo systemctl stop EventToInternet.service
