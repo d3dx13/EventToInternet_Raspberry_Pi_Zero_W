@@ -1,5 +1,5 @@
 [Unit]
-Description=EventToInternet
+Description=EventToInternet Automatic Updater
 After=NetworkManager.service time-sync.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
