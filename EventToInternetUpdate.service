@@ -1,9 +1,9 @@
 [Unit]
-Description=EventToInternet Automatic Updater
+Description=EventToInternet
 After=NetworkManager.service time-sync.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
-ExecStart=/bin/sh -c "/bin/python3 /etc/systemd/system/EventToInternet/async_executor.py"
+ExecStart=/bin/sh -c "/bin/bash update.bash"
 User=root
 Type=simple
 Restart=on-failure
