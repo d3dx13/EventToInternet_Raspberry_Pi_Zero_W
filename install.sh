@@ -1,8 +1,5 @@
 #!/bin/bash
 
-sudo apt install -y htop python3 python3-dev python3-pip gcc
-sudo python3 -m pip install -r requirements.txt
-
 sudo systemctl daemon-reload
 sudo systemctl stop EventToInternet.service
 sudo systemctl disable EventToInternet.service
