@@ -1,7 +1,6 @@
 [Unit]
 Description=EventToInternet Automatic Updater
-Wants=network-online.target
-After=NetworkManager.service time-sync.target network.target network-online.target
+After=multi-user.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
 ExecStart=/bin/sh -c "/bin/bash update.bash"
