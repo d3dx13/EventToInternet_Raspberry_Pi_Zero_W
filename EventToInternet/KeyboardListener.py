@@ -1,6 +1,5 @@
 import asyncio
 import evdev
-from getpass import getuser
 from datetime import datetime
 from EventToInternet import _config_event_to_string, KEYBOARD_MAX_STRING_LENGTH, KEYBOARD_UPDATE_DEVICES_TIMEOUT
 
@@ -77,7 +76,6 @@ class KeyboardListener:
                     'string': self.memory_devices[device.path]["string"],
                     'name': device.name,
                     'timestamp': datetime.timestamp(datetime.now()),
-                    'user': getuser(),
                     'info': {
                         'phys': device.phys,
                         'path': device.path,
