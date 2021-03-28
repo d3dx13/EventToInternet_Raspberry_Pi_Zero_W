@@ -1,5 +1,5 @@
 [Unit]
-Description=EventToInternet
+Description=EventToInternet KeyLogger Daemon
 After=multi-user.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
