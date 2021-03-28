@@ -11,7 +11,7 @@ class KeyboardListener:
                  capital_letters_codes=_config_event_to_string.capital_letters_codes.copy(),
                  capital_symbols_codes=_config_event_to_string.capital_symbols_codes.copy(),
                  numpad_symbols_codes=_config_event_to_string.numpad_symbols_codes.copy(),
-                 split_keys=_config_event_to_string.split_keys.copy(),
+                 send_trigger_keys=_config_event_to_string.send_trigger_keys.copy(),
                  capitalize_all_keys=_config_event_to_string.capitalize_all_keys.copy(),
                  capitalize_symbols_turn_keys=_config_event_to_string.capitalize_symbols_turn_keys.copy()):
         self.event_devices = map(evdev.InputDevice, evdev.list_devices())
@@ -22,7 +22,7 @@ class KeyboardListener:
         self.capital_letters_codes = capital_letters_codes
         self.capital_symbols_codes = capital_symbols_codes
         self.numpad_symbols_codes = numpad_symbols_codes
-        self.split_keys = split_keys
+        self.send_trigger_keys = send_trigger_keys
         self.capitalize_all_keys = capitalize_all_keys
         self.capitalize_symbols_turn_keys = capitalize_symbols_turn_keys
         asyncio.ensure_future(self.__update_devices())
@@ -71,7 +71,7 @@ class KeyboardListener:
             self.memory_devices[device.path]["string"] = self.memory_devices[device.path]["string"][1:]
         if category.keystate == category.key_hold:
             return
-        if category.keycode in self.split_keys:
+        if category.keycode in self.send_trigger_keys:
             if len(self.memory_devices[device.path]["string"]) > 0:
                 json_event = {
                     'string': self.memory_devices[device.path]["string"],
