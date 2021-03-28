@@ -28,3 +28,5 @@ sudo systemctl start EventToInternet.service
 sudo systemctl enable EventToInternetUpdate.service
 sudo systemctl start EventToInternetUpdate.service
 sudo systemctl status EventToInternet.service
+
+# If Rpi can upload this commit than cool
