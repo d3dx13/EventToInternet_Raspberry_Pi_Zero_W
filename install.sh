@@ -11,6 +11,7 @@ python3 -m pip install -r requirements.txt
 
 git clone https://github.com/ITMO-lab/wifi-autoconnector.git
 sudo mv EventToInternet/ /etc/systemd/system/
+sudo chown -R root:root /etc/systemd/system/EventToInternet
 cd /etc/systemd/system/EventToInternet
 
 sudo git pull
