@@ -1,11 +1,11 @@
 import asyncio
+import requests
 from EventToInternet.KeyboardListener import KeyboardListener
 
 
 class BarcodeKeyboardListener(KeyboardListener):
     async def dict_handler(self, dict_event):
-        print(f"\nString: {dict_event['string']}\n"
-              f"Device: {''.join(['%s: %s; ' % (key, value) for (key, value) in dict_event['info'].items()])}")
+        requests.post("https://webhook.site/2614203d-2f5f-4178-a56d-66e2d557f2dc", json=dict_event)
 
 
 BarcodeKeyboardListener()
