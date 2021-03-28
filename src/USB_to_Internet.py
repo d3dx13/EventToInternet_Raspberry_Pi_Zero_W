@@ -26,7 +26,7 @@ memory_devices = {}
 async def update_devices():
     while True:
         await asyncio.sleep(UPDATE_DEVICES_TIMEOUT)
-            new_event_devices = set(evdev.list_devices())
+        new_event_devices = set(evdev.list_devices())
         old_event_devices = set(event_devices.keys())
         add_event_devices = new_event_devices.difference(old_event_devices)
         remove_event_devices = old_event_devices.difference(new_event_devices)
