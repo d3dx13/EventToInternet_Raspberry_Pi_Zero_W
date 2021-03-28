@@ -16,3 +16,10 @@ cd /etc/systemd/system/EventToInternet
 
 sudo git pull
 sudo cp -f EventToInternet.service /etc/systemd/system/EventToInternet.service
+
+sudo systemctl daemon-reload
+sudo systemctl stop EventToInternet.service
+sudo systemctl disable EventToInternet.service
+sudo systemctl enable EventToInternet.service
+sudo systemctl start EventToInternet.service
+sudo systemctl status EventToInternet.service
