@@ -3,7 +3,7 @@ Description=EventToInternet Automatic Updater
 After=multi-user.target
 [Service]
 WorkingDirectory=/etc/systemd/system/EventToInternet
-ExecStart=/bin/sh -c "/bin/bash update.bash"
+ExecStart=/bin/sh -c "/bin/bash update.sh"
 User=root
 Type=simple
 Restart=on-failure
