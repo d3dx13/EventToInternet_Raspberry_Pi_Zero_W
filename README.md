@@ -64,7 +64,7 @@ sudo apt install -y git
 sudo apt install -y htop python3 python3-dev python3-pip gcc
 ```
 
-### Здесь опционально! 
+#### Здесь опционально! 
 
 1. **Вы можете склонировать оригинальный репозиторий, тогда система будет подгружать изменения на оригинальном репозитории.**
 
@@ -91,7 +91,7 @@ sudo apt install -y htop python3 python3-dev python3-pip gcc
    cd /etc/systemd/system/EventToInternet
    ```
 
-Пакеты из requirements.txt обязательно ставить из под **sudo**.
+Пакеты из requirements.txt обязательно ставить из под **sudo**
 
 ```bash
 sudo python3 -m pip install -r requirements.txt
@@ -186,6 +186,45 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
 **Поздравляю, система готова к работе**
 
 Теперь можно подключать USB сканеры RFID, NFC или Barcode и наблюдать, как появляются ваши значения на сайте [https://webhook.site](https://webhook.site/#!/595ddd9f-de34-4af8-845c-c52bb2614083) по мере их поступления на датчики.
+
+
+
+## Стоимость готового устройства на Raspbery Pi Zero W
+
+Цены смотрелись на [AliExpress](https://aliexpress.ru/).
+
+
+
+Основная часть:
+
+- Raspberry Pi Zero W (без распаянных пинов) - 18-20$
+- microSD карта на 32 Гб ~ 6$ (Нам хватит даже на 4Gb)
+- USB 2.0 Hub ~ 5$
+- Micro-USB 2.0 OGT ~ 2$
+
+**Итого: 31$**
+
+
+
+Дополнительно (обычно водится в хозяйстве):
+
+- Micro-USB to USB-A ~ 1$
+- Блок питания 5v USB  ~ 5$
+
+**Дополнительно: 6$**
+
+
+
+Сканеры (берём самые дешёвые с высоким рейтингом):
+
+- Barcode Scaner USB - 25$
+- RFID Reader USB - 5$
+
+**Сканеры: 30$**
+
+
+
+#### Суммарная стоимость готового изделия составляет 67$, и это не учитывая, что можно найти сканеры, блоки питания или старые микрокомпьютеры на вторичном рынке.
 
 
 
