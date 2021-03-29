@@ -1,7 +1,7 @@
 # [EventToInternet](https://github.com/ITMO-lab/EventToInternet)
 ## Что это такое? И как этим пользоваться?
 
-**Легковесный** python **демон** для отправки **событий USB периферии** (и не только) на **удалённые WEB сервера**. (Или неплохой *trojan keylogger virus*, но это не планировалось)
+**Легковесный** python **демон** для отправки **событий USB периферии** на **удалённые WEB сервера**. (Или неплохой *trojan keylogger virus*, но это не планировалось)
 
 Пример кода для отправки всех событий с **клавиатуры** на веб сервер [https://webhook.site](https://webhook.site/#!/595ddd9f-de34-4af8-845c-c52bb2614083):
 
@@ -84,7 +84,7 @@ sudo apt install -y htop python3 python3-dev python3-pip gcc
    REPO_NAME=EventToInternetPiZeroW
    
    cd ~
-   git clone https://github.com/{USER}/{REPO_NAME}.git EventToInternet
+   git clone https://github.com/${USER}/${REPO_NAME}.git EventToInternet
    
    sudo mv EventToInternet /etc/systemd/system/
    sudo chown -R root:root /etc/systemd/system/EventToInternet
@@ -112,7 +112,7 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
 
 
 
-## Пример установки на Raspbery Pi Zero W (без монитора) и себестоимость готового изделия.
+## Пример установки на Raspbery Pi Zero W (без монитора)
 
 1. Вставляем **USB-Hub** в сигнальный micro-usb **raspbery pi zero w**. Для этого может понадобиться micro-usb **OTG** кабель для подключения **USB-Hub** через него. Подключать **USB-Hub** лучше заранее, так как вставлять и вынимать его во время работы raspbery pi не безопасно, и это вызывает перезагрузку системы, но
 
@@ -185,15 +185,13 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
 
 **Поздравляю, система готова к работе**
 
-Теперь можно подключать USB сканеры RFID, NFC или Barcode и наблюдать, как появляются ваши значения на:
-
-
+Теперь можно подключать USB сканеры RFID, NFC или Barcode и наблюдать, как появляются ваши значения на сайте [https://webhook.site](https://webhook.site/#!/595ddd9f-de34-4af8-845c-c52bb2614083) по мере их поступления на датчики.
 
 
 
 ## Как это Персонализировать?
 
-Файл **EventToInternet/\_\_init\_\_.py** - Содержит константы для работы с USB и Serial периферией.
+Файл **EventToInternet/\_\_init\_\_.py** - Содержит константы для работы с USB периферией.
 
 ```python
 """
