@@ -81,7 +81,7 @@ sudo apt install -y htop python3 python3-dev python3-pip gcc
 
    ```bash
    USER=d3dx13
-   REPO_NAME=EventToInternetPiZeroW
+   REPO_NAME=EventToInternet_Raspberry_Pi_Zero_W
    
    cd ~
    git clone https://github.com/${USER}/${REPO_NAME}.git EventToInternet
