@@ -57,18 +57,43 @@ sudo reboot
 # reboot - необходим, только если произошло обновления ядра, что весьма вероятно.
 ```
 
-Для установки демона нам понадобится git, а ещё python3.X. Пакеты из requirements.txt обязательно ставить из под sudo.
+Для установки демона нам понадобится git, а ещё python3.X. 
 
 ```bash
 sudo apt install -y git
 sudo apt install -y htop python3 python3-dev python3-pip gcc
+```
 
-cd ~
-git clone https://github.com/ITMO-lab/EventToInternet.git
-sudo mv EventToInternet /etc/systemd/system/
-sudo chown -R root:root /etc/systemd/system/EventToInternet
-cd /etc/systemd/system/EventToInternet
+### Здесь опционально! 
 
+1. **Вы можете склонировать оригинальный репозиторий, тогда система будет подгружать изменения на оригинальном репозитории.**
+
+   ```bash
+   cd ~
+   git clone https://github.com/ITMO-lab/EventToInternet.git
+   
+   sudo mv EventToInternet /etc/systemd/system/
+   sudo chown -R root:root /etc/systemd/system/EventToInternet
+   cd /etc/systemd/system/EventToInternet
+   ```
+
+2. **Вы можете сделать fork и склонировать с вашего репозитория, тогда система будет подгружать изменения на вашей ветке git автоматически при наличии интернета.**
+
+   ```bash
+   USER=d3dx13
+   REPO_NAME=EventToInternetPiZeroW
+   
+   cd ~
+   git clone https://github.com/{USER}/{REPO_NAME}.git EventToInternet
+   
+   sudo mv EventToInternet /etc/systemd/system/
+   sudo chown -R root:root /etc/systemd/system/EventToInternet
+   cd /etc/systemd/system/EventToInternet
+   ```
+
+Пакеты из requirements.txt обязательно ставить из под **sudo**.
+
+```bash
 sudo python3 -m pip install -r requirements.txt
 sudo bash install.sh
 ```
@@ -87,9 +112,13 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
 
 
 
-## Пример установки на Raspbery Pi Zero W и себестоимость готового изделия.
+## Пример установки на Raspbery Pi Zero W (без монитора) и себестоимость готового изделия.
 
-1. Скачиваем и образ [RaspbianOS 32-bit](https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-03-25/2021-03-04-raspios-buster-armhf-lite.zip). Можно любую 32-битную версию, но лучше самую лёгкую, как в примере ниже.
+1. Вставляем **USB-Hub** в сигнальный micro-usb **raspbery pi zero w**. Для этого может понадобиться micro-usb **OTG** кабель для подключения **USB-Hub** через него. Подключать **USB-Hub** лучше заранее, так как вставлять и вынимать его во время работы raspbery pi не безопасно, и это вызывает перезагрузку системы, но
+
+   #### **Вы можете вставлять и вынимать устройства из самого USB-Hub**.
+
+2. Скачиваем и образ [RaspbianOS 32-bit](https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-03-25/2021-03-04-raspios-buster-armhf-lite.zip). Можно любую 32-битную версию, но лучше самую лёгкую, как в примере ниже.
 
 2. Скачиваем [Balena Etcher](https://www.balena.io/etcher/) - удобный файл для записи съёмных накопителей.
 
@@ -102,19 +131,61 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
    ./balenaEtcher*.AppImage
    ```
 
-4. Выбираем в качестве файла скачанный образ.
+4. Выбираем в качестве файла скачанный образ (можно запакованный).
 
 5. Выбираем в качестве диска выбранную SD карту.
 
-6. Нажимаем **Flash!** и ждём завершения записи.
+6. Нажимаем **Flash!** и ждём **Flash Complete**.
 
-7. 0
+7. Открываем SD карту в проводнике, она должна обнаружиться как 2 устройства:
 
-8. 0
+   - **rootfs**
+   - **boot**
 
-9. 0
+8. Переходим в **boot** и открываем в терминале. Выполняем команды:
 
-10. Выполняем действия из [Как это Установить?](##--как-это-установить?)
+   ```bash
+   touch ssh
+   touch wpa_supplicant.conf
+   ```
+
+9. Открываем созданный файл **wpa_supplicant.conf** любым удобным текстовым редактором и вставляем туда параметры (вместо **-NETWORK-NAME* имя точки доступа, вместо *FIRST-NETWORK-PASSWORD* пароль от неё) Wi-Fi точек доступа, к которым хотим подключаться. Можно оставить одну точку доступа. 
+
+   **Главное, чтобы был Интернет.**
+
+   ```bash
+   country=US
+   ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+   update_config=1
+   
+   network={
+       ssid="FIRST-NETWORK-NAME"
+       psk="FIRST-NETWORK-PASSWORD"
+   }
+   
+   ...
+   
+   network={
+       ssid="ANOTHER-NETWORK-NAME"
+       psk="ANOTHER-NETWORK-PASSWORD"
+   }
+   ```
+
+10. Безопасно извлекаем SD карту через проводник, и вставляем её в raspberry pi zero w, подключаем micro-usb кабель питания в raspberry pi. 
+
+11. Подключаем micro-usb кабель питания в raspberry pi, подключаемся к тому же Wi-Fi, что и raspberry pi и ждём несколько минут первого запуска.
+
+12. Заходим в терминал и вводим команду. У вас запросят **пароль**. По умолчанию он **raspberrypi**
+
+    ```bash
+    ssh pi@raspberrypi.local
+    ```
+
+13. Выполняем действия из [Как это Установить?](##--как-это-установить?)
+
+**Поздравляю, система готова к работе**
+
+Теперь можно подключать USB сканеры RFID, NFC или Barcode и наблюдать, как появляются ваши значения на:
 
 
 
