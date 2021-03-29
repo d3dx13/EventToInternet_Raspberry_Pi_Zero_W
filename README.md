@@ -87,6 +87,39 @@ sudo rm -rf /etc/systemd/system/EventToInternet*
 
 
 
+## Пример установки на Raspbery Pi Zero W и себестоимость готового изделия.
+
+1. Скачиваем и образ [RaspbianOS 32-bit](https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-03-25/2021-03-04-raspios-buster-armhf-lite.zip). Можно любую 32-битную версию, но лучше самую лёгкую, как в примере ниже.
+
+2. Скачиваем [Balena Etcher](https://www.balena.io/etcher/) - удобный файл для записи съёмных накопителей.
+
+3. Распаковываем и запускаем **Balena Etcher**:
+
+   ```bash
+   sudo apt install -y unzip
+   cd $(xdg-user-dir DOWNLOAD)
+   unzip balena-etcher-*.zip
+   ./balenaEtcher*.AppImage
+   ```
+
+4. Выбираем в качестве файла скачанный образ.
+
+5. Выбираем в качестве диска выбранную SD карту.
+
+6. Нажимаем **Flash!** и ждём завершения записи.
+
+7. 0
+
+8. 0
+
+9. 0
+
+10. Выполняем действия из [Как это Установить?](##--как-это-установить?)
+
+
+
+
+
 ## Как это Персонализировать?
 
 Файл **EventToInternet/\_\_init\_\_.py** - Содержит константы для работы с USB и Serial периферией.
